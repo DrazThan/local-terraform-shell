@@ -1,5 +1,3 @@
-# Streamlining Terraform Workflows: Introducing the local_terraform.sh Script
-
 I wrote this script while working on a gitops managed terraform environment in GCP with multiple Project IDs. Wanted a quick handly little tool to keep switching and testing my tf files.
 
 ## Key Features
