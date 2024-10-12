@@ -15,5 +15,16 @@ fi
 # Generate the backend_override.hcl file
 ./generate_local_backend.sh
 
-# Run the Terraform command
-terraform $1 -backend-config=backend_override.hcl "${@:2}"
+# Check if a variable file was provided
+if [ -n "$TF_VAR_FILE" ]; then
+    VAR_FILE_OPTION="-var-file=$TF_VAR_FILE"
+else
+    VAR_FILE_OPTION=""
+fi
+
+# If the command is 'init', pass the backend config file
+if [ "$1" == "init" ]; then
+    terraform init -backend-config=backend_override.hcl "${@:2}"
+else
+    terraform $1 $VAR_FILE_OPTION "${@:2}"
+fi
